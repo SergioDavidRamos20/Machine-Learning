@@ -35,7 +35,7 @@ scaler = MinMaxScaler()
 x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)
 
-n_neighbors = 7
+n_neighbors = 10
 
 knn = KNeighborsClassifier(n_neighbors)
 knn.fit(x_train, y_train)
@@ -57,18 +57,6 @@ confusion.fit(x_train, y_train)
 confusion.score(x_test, y_test)
 confusion.poof()
 
-#Grafica clasificación
-h = 2
-#Colores
-cmap_light = ListedColormap(['#FFAAAA', '#ffcc99', '#ffffb3','#b3ffff','#c2f0c2'])
-cmap_bold = ListedColormap(['FF0000', '#ff9933','#FFFF00','#00ffff','#00FF00'])
-
-#
-x_min, x_max = x[:, 0].min() - 1, x[:, 0].max() + 1
-y_min, y_max = x[:, 1].min() - 1, x[:, 1].max() + 1
-
-
-
 #Obtener mejor K
 k_range = range(1, 20)
 scores = []
@@ -79,19 +67,12 @@ for k in k_range:
     scores.append(knn.score(x_test, y_test))
     
 plt.figure()
-plt.xlabel(k)
+plt.xlabel("k")
 plt.ylabel('Presición')
 plt.scatter(k_range, scores)
 plt.xticks([0,5,10,15,20])
-"""
-knn = KNeighborsClassifier(n_neighbors=3)
-knn.fit(x, y)
 
-KNeighborsClassifier(n_neighbors=3)
 
-prediction = knn.predict()
-"""
-    
 
 
  
